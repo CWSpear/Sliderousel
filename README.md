@@ -10,4 +10,5 @@ Use this version at your own risk.
 Changelog
 =========
 
+* *2012-07-05.1* - Added inital support for pre-built auto navigation
 * *2012-07-05* - Optimized code (mostly fixing selectors, caching, etc) and commented the code. Also miscellaneous stability fixes.
