@@ -44,11 +44,10 @@
         needsStyle:   false, // apply styles via jQuery?
         nextButton:   false, // class for button that moves slideshow forward
         prevButton:   false, // class for button that moves slideshow backward
+        navigation:   false,
         slidesToShow: -1, // number of slides to show at one time (-1 for as many as will fit). 
                           // does not initiate if there aren't that many slides. 
                           // does not apply to fullwidth slideshows
-
-        jump:       1 // private var to keep track of jumps?
     };    
 
     var clickable = true;
@@ -68,6 +67,8 @@
                                 
                 settings.curSlideIndex = 0;
 
+                // set up vars
+                settings.jump = 1;
                 $panel = $this.find(settings.panel);
                 var $slides = $panel.find(settings.slide);
 
@@ -163,6 +164,20 @@
                     if(settings.slideshow) {
                         settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
                     }   
+
+                    // set up auto navigation
+                    if(settings.navigation) {
+                        var $nav = $('<div class="carousel-navigation">').appendTo($this).on('click', 'a', function(event) {
+                            event.preventDefault;
+
+                            var jumpTo = $(this).data('jump');
+                            $this.carousel('jump', jumpTo);
+                        });
+
+                        $slides.each(function(i) {
+                            $('<a href="#" data-jump="' + i + '">' + (i + 1) + '</a>').appendTo($nav);
+                        });
+                    }
 
                     // it sets up sizing vars on window's resize, so let's force it the first time
                     $(window).resize();  
