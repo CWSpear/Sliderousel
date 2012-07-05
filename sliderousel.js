@@ -52,6 +52,7 @@
     };    
 
     var clickable = true;
+    var $panel; // doesn't change throughout plugin, so let's just have one reference set up in init
         
     var methods = {
 
@@ -67,7 +68,7 @@
                                 
                 settings.curSlideIndex = 0;
 
-                var $panel = $this.find(settings.panel);
+                $panel = $this.find(settings.panel);
                 var $slides = $panel.find(settings.slide);
 
                 // initialize positions (which are based off of initial DOM position)
@@ -92,6 +93,11 @@
                         // make sure we have recent version of "slides"
                         $slides = $panel.find(settings.slide);
 
+                        // make sure these settings realign with screen resize
+                        settings.slideAmount = settings.slideWidth = $slides.eq(0).outerWidth(true);
+                        
+                        settings.numberOfSlides = $slides.length;
+
                         // because of different combinations of settings, this can get complex,
                         // but we need to adjust the slider on screen resize
                         if(settings.fullWidth) {
@@ -101,14 +107,9 @@
                             settings.offset = 0;
 
                             if(settings.slidesToShow > 0) {
-                                $this.width(settings.slidesToShow * settings.slideWidth);                            
+                                $this.width(settings.slidesToShow * settings.slideWidth); 
                             }
                         }
-
-                        // make sure these settings realign with screen resize
-                        settings.slideAmount = settings.slideWidth = $slides.eq(0).outerWidth(true);
-                        
-                        settings.numberOfSlides = $slides.length;
                         
                         // these two lines are the "reset"
                         $panel.css('left', '-' + ((settings.slideAmount) + settings.offset) + 'px');
@@ -119,17 +120,17 @@
                             $('img', settings.slide).css('max-width', Math.max(960, $(this).width()));
                             $this.height('auto');
                         }
-                    }).resize();
+                    });
                     
                     // bind buttons
                     if(settings.nextButton) {
-                        $(settings.prevButton).click(function(event) { 
+                        $(settings.nextButton).click(function(event) { 
                             event.preventDefault(); 
                             $this.carousel('next'); 
                         });
                     }
                     if(settings.prevButton) {
-                        $(settings.nextButton).click(function(event) { 
+                        $(settings.prevButton).click(function(event) { 
                             event.preventDefault(); 
                             $this.carousel('prev'); 
                         });
@@ -138,20 +139,20 @@
                     // if only 1 slide, copy and append twice. if only 2 slides, copy the two slides and append. needs min of 3 slides to work (since 3 can be visible at once)
                     if(settings.fullWidth) {
                         if(settings.numberOfSlides == 1) {
-                            $slides.filter(':last')
-                                .after($slides.filter(':first').clone(true))
-                                .after($slides.filter(':first').clone(true), settings); 
+                            $slides.last()
+                                .after($slides.first().clone(true))
+                                .after($slides.first().clone(true), settings); 
                         }
 
                         if(settings.numberOfSlides == 2) {
-                            $slides.filter(':last')
+                            $slides.last()
                                 .after($slides.clone(true), settings);
                         }
                     }
                     
                     // first last slide before first 
-                    $slides.filter(':last').insertBefore(
-                        $slides.filter(':first')
+                    $slides.last().insertBefore(
+                        $slides.first()
                     );
                             
                     // prepare the first slide
@@ -161,7 +162,10 @@
                     // set timeout if this is a slideshow
                     if(settings.slideshow) {
                         settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
-                    }     
+                    }   
+
+                    // it sets up sizing vars on window's resize, so let's force it the first time
+                    $(window).resize();  
                 }
             });
         }, // init()
@@ -179,28 +183,50 @@
                 if(!clickable) return;
                 clickable = false;
 
+                // set up variables
+                var $slides = $panel.find(settings.slide);
+
                 // prep the slider to go forward
-                var jump = settings.jump;
                 // if we're sliding several at once, jump will be the number we're jumping, so we prepare accodingly
+                var jump = settings.jump;                
                 for(var i=0; i < jump; i++) {
-                    $(settings.slide + ':last').after($(settings.slide).eq(i).clone(true));
+                    // order constantly changing, so let's not use cached version
+                    var $clone = $panel.find(settings.slide).eq(i).clone(true, false);
+                    $clone.insertAfter($panel.find(settings.slide).last());
                 }
+
+                // order has changed. refresh $slides var
+                $slides = $panel.find(settings.slide);
                 
                 // trigger the "slide is about to start" or "before" callback
-                settings.before($(settings.slide).eq(0 + (jump - 1)), $(settings.slide).eq(1 + (jump - 1)), $(settings.slide).eq(2 + (jump - 1)), settings);
+                settings.before(
+                    $slides.eq(0 + (jump - 1)), // prev slide
+                    $slides.eq(1 + (jump - 1)), // current slide
+                    $slides.eq(2 + (jump - 1)), // next slide
+                    settings // settings (for reference on timer lengths, etc)
+                );
         
                 // advance the slider to the next position
                 $(settings.panel).animate({'left': '-=' + settings.slideAmount}, settings.speed, settings.easing,
                     function() {     
                         // reset the slider positions
                         for(var i=0; i < jump; i++) {
-                            $(settings.slide + ':first').remove();
+                            // order constantly changing, so let's not use cached version
+                            $panel.find(settings.slide).first().remove();
                         }
 
-                        $(settings.panel).css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');
+                        $panel.css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');
+
+                        // order has changed. refresh $slides var
+                        $slides = $panel.find(settings.slide);
                                 
                         // trigger the "slide just finished" or "after" callback
-                        settings.after($(settings.slide).eq(0), $(settings.slide).eq(1), $(settings.slide).eq(2), settings);
+                        settings.after(
+                            $slides.eq(0), // prev slide
+                            $slides.eq(1), // current slide
+                            $slides.eq(2), // next slide
+                            settings // settings (for reference on timer lengths, etc)
+                        );
             
                         // make the slider buttons clickable again
                         clickable = true;
@@ -226,33 +252,54 @@
                 // can't chain clicks
                 if(!clickable) return;
                 clickable = false;
+
+                // set up variables
+                var $slides = $panel.find(settings.slide);
     
                 // prep the slider to go backward by cloning last slide to the front and adjusting positioning
                 var jump = settings.jump;
 
                 // if we're sliding several at once, jump will be the number we're jumping, so we prepare accodingly
-                for(var i=0; i < jump; i++) {
-                    var len = $(settings.slide).length;
-                    $(settings.slide + ':first').before($(settings.slide).eq(len - 1 - i).clone(true)); 
+                for(var i = 0; i < jump; i++) {
+                    var len = $panel.find(settings.slide).length;
+                    var $clone = $panel.find(settings.slide).eq(len - 1 - i).clone(true, false);
+                    $clone.insertBefore($panel.find(settings.slide).first()); 
                 }
 
-                $(settings.panel).css('left', '-' + ((settings.slideWidth + settings.slideAmount) + settings.offset) + 'px');
+                $panel.css('left', '-' + ((settings.slideWidth + settings.slideAmount) + settings.offset) + 'px');
             
+                // order has changed. refresh $slides var
+                $slides = $panel.find(settings.slide);
+
                 // trigger the "slide is about to start" or "before" callback
-                settings.before($(settings.slide).eq(3), $(settings.slide).eq(2), $(settings.slide).eq(1), settings);
+                settings.before(
+                    $slides.eq(3), // prev slide
+                    $slides.eq(2), // current slide
+                    $slides.eq(1), // next slide
+                    settings // settings (for reference on timer lengths, etc)
+                );
                 
                 // advance the slider to the previous position
                 $(settings.panel).animate({'left': '+=' + settings.slideAmount}, settings.speed, settings.easing,
                     function() {        
                         // reset the slider positions
                         for(var i=0; i < jump; i++) {
-                            $(settings.slide + ':first').remove();
-                            $(settings.slide + ':first').before($(settings.slide + ':last'));
+                            $panel.find(settings.slide).first().remove();
+                            $panel.find(settings.slide).first().before($panel.find(settings.slide).last());
                         }
-                        $(settings.panel).css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');                      
+
+                        $panel.css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');                      
                                 
+                        // order has changed. refresh $slides var
+                        $slides = $panel.find(settings.slide);
+
                         // trigger the "slide just finished" or "after" callback
-                        settings.after($(settings.slide).eq(0), $(settings.slide).eq(1), $(settings.slide).eq(2), settings);
+                        settings.after(
+                            $slides.eq(0), // prev slide
+                            $slides.eq(1), // current slide
+                            $slides.eq(2), // next slide
+                            settings // settings (for reference on timer lengths, etc)
+                        );
         
                         // make the slider buttons clickable again
                         clickable = true;
@@ -274,21 +321,33 @@
                 var $this = $(this);
                 
                 var settings = $this.data('carousel');
-                var curP = $(settings.slide, settings.panel).eq(1).data('position');
+
+                // get current position
+                var currentPosition = $panel.find(settings.slide).eq(1).data('position');
             
-                var change = jumpTo - curP;
+                // find how much we're changing
+                var change = jumpTo - currentPosition;
                 
+                // if change == 0, it means we're already on that slide
                 if(change == 0) return;
                 
+                // determine that we're going to jump by abs(change)
                 settings.jump = Math.abs(change);
+
+                // stop current timeout
                 clearTimeout(settings.timer);
+
+                // make a note of the "normal" slideAmount
                 var tempWidth = settings.slideAmount;
             
+                // multiple the slide amount to reflech the number of slides we're changing
                 settings.slideAmount *= Math.abs(change);
                 
+                // start the jump
                 if(change < 0) $this.carousel('prev');
                 else $this.carousel('next');
             
+                // restore settings to their normal amounts
                 settings.jump = 1;
                 settings.slideAmount = tempWidth;
             }); 

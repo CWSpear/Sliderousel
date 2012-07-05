@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <title>Sliderousel Tests</title>
+
+    <style type="text/css">
+        img {
+            display:block;
+        }
+
+        .slide {
+            margin-right:10px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="prev">Prev</button>
+    <button class="next">Next</button>
+
+    <div id="carousel1">
+        <div class="panel">
+
+            <div class="slide 0">
+                <img src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+0">
+            </div>
+            <div class="slide 1">
+                <img src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+1">
+            </div>
+            <div class="slide 2">
+                <img src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+2">
+            </div>
+            <div class="slide 3">
+                <img src="http://placehold.it/400x300/099/fff/.png&amp;text=Slide+3">
+            </div>
+            <div class="slide 4">
+                <img src="http://placehold.it/400x300/990/fff/.png&amp;text=Slide+4">
+            </div>
+            <div class="slide 5">
+                <img src="http://placehold.it/400x300/909/fff/.png&amp;text=Slide+5">
+            </div>
+
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="../sliderousel.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('img:last').load(function() {
+                $('#carousel1').carousel({
+                    needsStyle: true,
+                    nextButton: '.next',
+                    prevButton: '.prev',
+                    slidesToShow: 3
+                });
+            });
+        });    
+    </script>
+</body>
+</html>
