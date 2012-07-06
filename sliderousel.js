@@ -29,28 +29,36 @@
     // </div>
     var defaults = {
         slide:        '.slide', // default slide class
-        panel:        false, // default panel class (section that contains all slides). builds one for you by default
-        direction:    'next', // [next | prev] indicates direction to move slider if it auto-slides
+        panel:        false,    // default panel class (section that contains all slides). builds one for you by default
+        direction:    'next',   // [next | prev] indicates direction to move slider if it auto-slides
+        
+        slideshow:    true,     // is this a slideshow? (i.e. auto-advances)
+        speed:        800,      // transition speed in ms
+        timeout:      8000,     // timeout between slides (timer starts after last slide transition ends)
+        fullWidth:    false,    // should this slideshow take up the entire width of the screen?
+        
+        easing:       'swing',  // without jQuery UI, only swing and linear are supported.
+                                //     see http://jqueryui.com/demos/effect/easing.html for jQuery UI easings
+
+        nextButton:   false,    // class for button that moves slideshow forward
+        prevButton:   false,    // class for button that moves slideshow backward
+        navigation:   false,    // automatically build navigation?
+
+        needsStyle:   true,     // apply styles via jQuery?
+        slidesToShow: -1,       // number of slides to show at one time (-1 for as many as will fit).
+                                //     does not initiate if there aren't that many slides.
+                                //     does not apply to fullwidth slideshows
+
+        // callbacks
         init:         function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
         before:       function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
         after:        function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
-        slideshow:    true, // is this a slideshow? (i.e. auto-advances)
-        speed:        800, // transition speed in ms
-        timeout:      8000, // timeout between slides (timer starts after last slide transition ends)
-        easing:       'swing', // easing. without jQuery UI, only swing and linear are supported
-        fullWidth:    false, // should this slideshow take up the entire width of the screen?
-        needsStyle:   true, // apply styles via jQuery?
-        nextButton:   false, // class for button that moves slideshow forward
-        prevButton:   false, // class for button that moves slideshow backward
-        navigation:   false,
-        minWidth:     960, // set a minWidth for fullWidth sliders. fullWidth sliders can be responsive,
-                           // this makes sure they don't get too small. Only is used is responsive is true
-        slidesToShow: -1,  // number of slides to show at one time (-1 for as many as will fit).
-                          // does not initiate if there aren't that many slides.
-                          // does not apply to fullwidth slideshows
+
 
         // Not Yet Implemented
-        responsive:   false // this can be used to make sliders to be responsive.
+        responsive:   false, // this can be used to make sliders to be responsive.
+        minWidth:     960 // set a minWidth for fullWidth sliders. fullWidth sliders can be responsive,
+                           // this makes sure they don't get too small. Only is used is responsive is true
     };
 
     var clickable = true;
