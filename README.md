@@ -1,5 +1,5 @@
 Sliderousel
-===========
+===
 
 Combination multipurpose easy-to-set up carousel and/or slider jQuery plugin.
 
@@ -7,7 +7,7 @@ A few features aren't completely polished, but the base features work well, and 
 
 
 Markup
-======
+---
 
 The markup was intended to be as simple as possible. It needs another div inside the slider and outside of the slides, but it will create it for you by default. 
 
@@ -29,7 +29,7 @@ Be aware of this if you are performing any extra JavaScript the slider (i.e. the
 
 
 Style
-=====
+---
 
 ...None! The script will do all the necessary styling for you. What'd I tell you? Easy to set up, no?
 
@@ -39,7 +39,7 @@ If you want to define all of the styles your own, set needsStyle to false.
 
 
 Usage
-=====
+---
 
 ```javascript
 $('.slider').carousel();
@@ -47,7 +47,7 @@ $('.slider').carousel();
 
 
 Options
-=======
+---
 
 I will add more detailed options explanations and some tutorial videos eventually, but for now, here's all of the customizable options with a short explanation.
 
@@ -62,7 +62,8 @@ var defaults = {
     slideshow:    true, // is this a slideshow? (i.e. auto-advances)
     speed:        800, // transition speed in ms
     timeout:      8000, // timeout between slides (timer starts after last slide transition ends)
-    easing:       'swing', // easing. without jQuery UI, only swing and linear are supported
+    easing:       'swing', // without jQuery UI, only swing and linear are supported.
+                           // see http://jqueryui.com/demos/effect/easing.html for jQuery UI easings
     fullWidth:    false, // should this slideshow take up the entire width of the screen?
     needsStyle:   true, // apply styles via jQuery?
     nextButton:   false, // class for button that moves slideshow forward
@@ -78,7 +79,7 @@ var defaults = {
 
 
 JSHint
-======
+---
 
 This code is under JSHint via SublimeLinter. If you want to contribute, I'd really appreciate if your code could pass JSHint with these options:
 
@@ -109,12 +110,12 @@ This code is under JSHint via SublimeLinter. If you want to contribute, I'd real
 
 
 Changelog
-=========
+---
 
-Beta 0.9
---------
+### Beta 0.9
+
 * __[Feature]__ Added inital support for pre-built auto navigation
-* __[Enhancement]__ Made it so you don't have to wrap your code in a panel (the script will do it for you). You can still define one if you have it in your markup. This makes the default syntax simpler. Also made it apply style by default. This makes the default sliderto require simple markup and no CSS.
+* __[Enhancement]__ Made it so you don't have to wrap your code in a panel (the script will do it for you). You can still define one if you have it in your markup. This makes the default syntax simpler. Also made it apply style by default. This makes the default slider to require only simple markup and no CSS.
 * __[Enhancement]__ Made it so the timer doesn't start until _after_ the animation completes
 * __[Enhancement]__ Added minified version (via uglify.js) for convenience
 * __[Bugfix]__ Fixed issue where I accidentally mapped the global variables document to window and window to document
