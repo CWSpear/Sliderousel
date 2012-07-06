@@ -1,5 +1,5 @@
 // Cameron Spear's "Sliderousel" (that's supposed to be slider + carousel)
-;(function($, document, window, undefined) {
+;(function($, window, document, undefined) {
     $.fn.carousel = function(method) {
         // Method calling logic
         if(methods[method]) {
@@ -45,9 +45,15 @@
         nextButton:   false, // class for button that moves slideshow forward
         prevButton:   false, // class for button that moves slideshow backward
         navigation:   false,
-        slidesToShow: -1  // number of slides to show at one time (-1 for as many as will fit).
+        minWidth:     960, // set a minWidth for fullWidth sliders. fullWidth sliders can be responsive,
+                           // this makes sure they don't get too small. Only is used is responsive is true
+        slidesToShow: -1,  // number of slides to show at one time (-1 for as many as will fit).
                           // does not initiate if there aren't that many slides.
                           // does not apply to fullwidth slideshows
+
+        // Not Yet Implemented
+        responsive:   false // this can be used to make sliders to be responsive.
+
     };
 
     var clickable = true;
@@ -90,7 +96,7 @@
                     }
 
                     $(window).resize(function() {
-                        // make sure we have recent version of "slides"
+                        // make sure to refresh $slides to be in current state
                         $slides = $panel.find(settings.slide);
 
                         // make sure these settings realign with screen resize
@@ -111,16 +117,17 @@
                             }
                         }
                         
-                        // these two lines are the "reset"
+                        // these two lines are the position "reset"
                         $panel.css('left', '-' + ((settings.slideAmount) + settings.offset) + 'px');
                         settings.curSlideIndex = (settings.curSlideIndex % settings.numberOfSlides) + 1;
                         
-                        // TODO: This assumes a min width of 960, but probably shouldn't
-                        if(settings.fullWidth) {
-                            $('img', settings.slide).css('max-width', Math.max(960, $(this).width()));
+                        // TODO: implement responsive
+                        // make slideshow responsive
+                        if(settings.fullWidth && settings.responsive && false) {
+                            $slides.find('img').css('max-width', Math.max(settings.minWidth, $this.width()));
                             $this.height('auto');
                         }
-                    });
+                    }); // $(window).resize()
                     
                     // bind buttons
                     if(settings.nextButton) {
@@ -138,13 +145,13 @@
                     
                     // if only 1 slide, copy and append twice. if only 2 slides, copy the two slides and append. needs min of 3 slides to work (since 3 can be visible at once)
                     if(settings.fullWidth) {
-                        if(settings.numberOfSlides == 1) {
+                        if(settings.numberOfSlides === 1) {
                             $slides.last()
                                 .after($slides.first().clone(true))
                                 .after($slides.first().clone(true), settings);
                         }
 
-                        if(settings.numberOfSlides == 2) {
+                        if(settings.numberOfSlides === 2) {
                             $slides.last()
                                 .after($slides.clone(true), settings);
                         }
@@ -378,5 +385,6 @@
                 settings.slideAmount = tempWidth;
             });
         } // jump()
+
     }; // methods
 })(jQuery, this, document);
