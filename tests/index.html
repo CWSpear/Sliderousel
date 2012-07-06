@@ -4,6 +4,10 @@
     <title>Sliderousel Tests</title>
 
     <style type="text/css">
+        body {
+            margin:0;
+        }
+
         img {
             display:block;
         }
@@ -22,22 +26,22 @@
         <div class="panel">
 
             <div class="slide 0">
-                <img src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
             </div>
             <div class="slide 1">
-                <img src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
             </div>
             <div class="slide 2">
-                <img src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
             </div>
             <div class="slide 3">
-                <img src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
             </div>
             <div class="slide 4">
-                <img src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
             </div>
             <div class="slide 5">
-                <img src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
             </div>
 
         </div>
@@ -47,22 +51,22 @@
         <div class="panel">
 
             <div class="slide 0">
-                <img src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
             </div>
             <div class="slide 1">
-                <img src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
             </div>
             <div class="slide 2">
-                <img src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
             </div>
             <div class="slide 3">
-                <img src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
             </div>
             <div class="slide 4">
-                <img src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
             </div>
             <div class="slide 5">
-                <img src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
             </div>
 
         </div>
@@ -73,22 +77,22 @@
         <div class="panel">
 
             <div class="slide 0">
-                <img src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                <img width="960" height="300" src="http://placehold.it/960x300/900/fff/.png&amp;text=Slide+1">
             </div>
             <div class="slide 1">
-                <img src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                <img width="960" height="300" src="http://placehold.it/960x300/ffa500/fff/.png&amp;text=Slide+2">
             </div>
             <div class="slide 2">
-                <img src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                <img width="960" height="300" src="http://placehold.it/960x300/ffff00/fff/.png&amp;text=Slide+3">
             </div>
             <div class="slide 3">
-                <img src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                <img width="960" height="300" src="http://placehold.it/960x300/090/fff/.png&amp;text=Slide+4">
             </div>
             <div class="slide 4">
-                <img src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                <img width="960" height="300" src="http://placehold.it/960x300/009/fff/.png&amp;text=Slide+5">
             </div>
             <div class="slide 5">
-                <img src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                <img width="960" height="300" src="http://placehold.it/960x300/800080/fff/.png&amp;text=Slide+6">
             </div>
 
         </div>
@@ -100,48 +104,51 @@
     <script src="../sliderousel.js"></script>
     <script>
         $(document).ready(function() {
-            $('img:last').load(function() {
-                $('#carousel1').carousel({
-                    needsStyle: true,
-                    nextButton: '.next',
-                    prevButton: '.prev',
-                    slidesToShow: 3,
-                    navigation: true
-                }); // 1
 
-                $('#carousel2').carousel({
-                    needsStyle: true,
-                    slidesToShow: 1,
-                    slideshow: true,
-                    timeout: 1000,
-                    init: function(prev, cur, next, settings) {
-                        console.log(
-                            prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                        );
-                    },
-                    before: function(prev, cur, next, settings) {
-                        console.log(
-                            prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                        );
-                    },
-                    after: function(prev, cur, next, settings) {
-                        console.log(
-                            prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                            next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                        );
-                    }
-                }); // 2
+            $('#carousel1').carousel({
+                needsStyle: true,
+                nextButton: '.next',
+                prevButton: '.prev',
+                slidesToShow: 2,
+                navigation: true
+            }); // 1
 
-                $('#carousel3').carousel({
-                    slideshow: true
-                    //, fullWidth: true
-                });
-            });
+            $('#carousel2').carousel({
+                needsStyle: true,
+                slidesToShow: 1,
+                slideshow: true,
+                // timeout: 1000,
+                init: function(prev, cur, next, settings) {
+                    console.log(
+                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                    );
+                },
+                before: function(prev, cur, next, settings) {
+                    console.log(
+                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                    );
+                },
+                after: function(prev, cur, next, settings) {
+                    console.log(
+                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                    );
+                }
+            }); // 2
+
+            $('#carousel3').carousel({
+                slideshow: true
+                , fullWidth: true
+                , needsStyle: true
+                , responsive: true
+                , timeout: 1000
+            }); // 3
+
         });    
     </script>
 </body>
