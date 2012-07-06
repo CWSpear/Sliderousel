@@ -12,9 +12,9 @@ Changelog
 
 Beta 0.9
 --------
-* __[Feature]__ Added minified version (via uglify.js) for convenience
 * __[Feature]__ Added inital support for pre-built auto navigation
 * __[Enhancement]__ Made it so the timer doesn't start until _after_ the animation completes
+* __[Enhancement]__ Added minified version (via uglify.js) for convenience
 * __[Bugfix]__ Fixed issue where I accidentally mapped the global variables document to window and window to document
 * __[Bugfix]__ Fixed issue that caused problems with more than one slider on a page
 * __[Bugfix]__ Miscellaneous stability fixes
