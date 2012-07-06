@@ -7,6 +7,35 @@ A few features aren't completely polished, but the base features work well, and 
 
 Use this version at your own risk.
 
+JSHint
+======
+This code is under JSHint via SublimeLinter. If you want to contribute, I'd really appreciate if your code could pass JSHint with these options:
+
+```json
+"jshint_options":
+{
+    // inclusive  
+    "bitwise":   true,
+    "eqeqeq":    true,
+    "latedef":   true,
+    "newcap":    true,
+    "noarg":     true,
+    "nonew":     true,
+    "regexp":    true,
+    "trailing":  true,
+    "undef":     true,
+
+    // exclusive
+    "regexdash": true,
+    "sub":       true,
+
+    // environment
+    "browser":   true,
+    "devel":     true,
+    "jquery":    true
+}
+```
+
 Changelog
 =========
 
