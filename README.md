@@ -53,8 +53,8 @@ I will add more detailed options explanations and some tutorial videos eventuall
 
 ```javascript
 var defaults = {
-	slide:        '.slide', // default slide class
-	panel:        false,    // default panel class (section that contains all slides). builds one for you by default
+	slide:        '.slide', // default slide selector/jQuery object
+	panel:        false,    // default panel selector/jQuery object (section that contains all slides). builds one for you by default
 	direction:    'next',   // [next | prev] indicates direction to move slider if it auto-slides
 	
 	slideshow:    true,     // is this a slideshow? (i.e. auto-advances)
@@ -65,8 +65,8 @@ var defaults = {
 	easing:       'swing',  // without jQuery UI, only swing and linear are supported.
 	                        //     see http://jqueryui.com/demos/effect/easing.html for jQuery UI easings
 	
-	nextButton:   false,    // class for button that moves slideshow forward
-	prevButton:   false,    // class for button that moves slideshow backward
+	nextButton:   false,    // selector/jQuery object for button that moves slideshow forward
+	prevButton:   false,    // selector/jQuery object for button that moves slideshow backward
 	navigation:   false,    // automatically build navigation?
 	
 	needsStyle:   true,     // apply styles via jQuery?
