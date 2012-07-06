@@ -5,10 +5,79 @@ Combination multipurpose easy-to-set up carousel and/or slider jQuery plugin.
 
 A few features aren't completely polished, but the base features work well, and I'm moving it into a more "Beta" type phase. Polishing off the current features and only adding minor functionality.
 
-Use this version at your own risk.
+
+Markup
+======
+
+The markup was intended to be as simple as possible. It needs another div inside the slider and outside of the slides, but it will create it for you by default. 
+
+Be aware of this if you are performing any extra JavaScript the slider (i.e. the DOM will not be same). You can put a panel (as I call it) in the markup and define its class in the options
+
+```html
+<div class="slider">
+    <div class="slide 1">
+        // ... any content ...
+    </div>
+    <div class="slide 2">
+        // ... any content ...
+    </div>
+    <div class="slide 3">
+        // ... any content ...
+    </div>
+</div>
+```
+
+
+Style
+=====
+
+...None! The script will do all the necessary styling for you. What'd I tell you? Easy to set up, no?
+
+Obviously, there may be some styling you'd like to apply. Maybe some margin on the slides unless you _want_ them touching, etc.
+
+
+Usage
+=====
+
+```jQuery
+$('.slider').carousel();
+```
+
+
+Options
+=======
+
+I will add more detailed options explanations and some tutorial videos eventually, but for now, here's all of the customizable options with a short explanation.
+
+```javascript
+var defaults = {
+    slide:        '.slide', // default slide class
+    panel:        false, // default panel class (section that contains all slides). builds one for you by default
+    direction:    'next', // [next | prev] indicates direction to move slider if it auto-slides
+    init:         function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
+    before:       function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
+    after:        function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
+    slideshow:    true, // is this a slideshow? (i.e. auto-advances)
+    speed:        800, // transition speed in ms
+    timeout:      8000, // timeout between slides (timer starts after last slide transition ends)
+    easing:       'swing', // easing. without jQuery UI, only swing and linear are supported
+    fullWidth:    false, // should this slideshow take up the entire width of the screen?
+    needsStyle:   true, // apply styles via jQuery?
+    nextButton:   false, // class for button that moves slideshow forward
+    prevButton:   false, // class for button that moves slideshow backward
+    navigation:   false,
+    minWidth:     960, // set a minWidth for fullWidth sliders. fullWidth sliders can be responsive,
+                       // this makes sure they don't get too small. Only is used is responsive is true
+    slidesToShow: -1,  // number of slides to show at one time (-1 for as many as will fit).
+                      // does not initiate if there aren't that many slides.
+                      // does not apply to fullwidth slideshows
+};
+```
+
 
 JSHint
 ======
+
 This code is under JSHint via SublimeLinter. If you want to contribute, I'd really appreciate if your code could pass JSHint with these options:
 
 ```json
@@ -36,12 +105,14 @@ This code is under JSHint via SublimeLinter. If you want to contribute, I'd real
 }
 ```
 
+
 Changelog
 =========
 
 Beta 0.9
 --------
 * __[Feature]__ Added inital support for pre-built auto navigation
+* __[Enhancement]__ Made it so you don't have to wrap your code in a panel (the script will do it for you). You can still define one if you have it in your markup. This makes the default syntax simpler. Also made it apply style by default. This makes the default sliderto require simple markup and no CSS.
 * __[Enhancement]__ Made it so the timer doesn't start until _after_ the animation completes
 * __[Enhancement]__ Added minified version (via uglify.js) for convenience
 * __[Bugfix]__ Fixed issue where I accidentally mapped the global variables document to window and window to document

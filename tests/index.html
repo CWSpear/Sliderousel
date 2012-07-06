@@ -18,58 +18,77 @@
     </style>
 </head>
 <body>
+    <div id="carousel">
+
+        <div class="slide 0">
+            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+        </div>
+        <div class="slide 1">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+        </div>
+        <div class="slide 2">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+        </div>
+        <div class="slide 3">
+            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+        </div>
+        <div class="slide 4">
+            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+        </div>
+        <div class="slide 5">
+            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+        </div>
+
+    </div>
+
 
     <button class="prev">Prev</button>
     <button class="next">Next</button>
 
     <div id="carousel1">
-        <div class="panel">
 
-            <div class="slide 0">
-                <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
-            </div>
-            <div class="slide 1">
-                <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
-            </div>
-            <div class="slide 2">
-                <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
-            </div>
-            <div class="slide 3">
-                <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
-            </div>
-            <div class="slide 4">
-                <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
-            </div>
-            <div class="slide 5">
-                <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
-            </div>
-
+        <div class="slide 0">
+            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
         </div>
+        <div class="slide 1">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+        </div>
+        <div class="slide 2">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+        </div>
+        <div class="slide 3">
+            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+        </div>
+        <div class="slide 4">
+            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+        </div>
+        <div class="slide 5">
+            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+        </div>
+
     </div>
 
     <div id="carousel2">
-        <div class="panel">
 
-            <div class="slide 0">
-                <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
-            </div>
-            <div class="slide 1">
-                <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
-            </div>
-            <div class="slide 2">
-                <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
-            </div>
-            <div class="slide 3">
-                <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
-            </div>
-            <div class="slide 4">
-                <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
-            </div>
-            <div class="slide 5">
-                <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
-            </div>
-
+        <div class="slide 0">
+            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
         </div>
+        <div class="slide 1">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+        </div>
+        <div class="slide 2">
+            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+        </div>
+        <div class="slide 3">
+            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+        </div>
+        <div class="slide 4">
+            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+        </div>
+        <div class="slide 5">
+            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+        </div>
+
     </div>
     <div id="carousel2-output"></div>
 
@@ -104,20 +123,19 @@
     <script src="../sliderousel.js"></script>
     <script>
         $(document).ready(function() {
+            $('#carousel').carousel();
 
             $('#carousel1').carousel({
-                needsStyle: true,
                 nextButton: '.next',
                 prevButton: '.prev',
                 slidesToShow: 2,
-                navigation: true
+                navigation: true,
+                slideshow: false
             }); // 1
 
             $('#carousel2').carousel({
-                needsStyle: true,
                 slidesToShow: 1,
-                slideshow: true,
-                // timeout: 1000,
+                timeout: 1000,
                 init: function(prev, cur, next, settings) {
                     console.log(
                         prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
@@ -142,12 +160,11 @@
             }); // 2
 
             $('#carousel3').carousel({
-                slideshow: true
-                , fullWidth: true
-                , needsStyle: true
-                , responsive: true
-                , minWidth: 300
-                , timeout: 1000
+                fullWidth: true,
+                responsive: true,
+                minWidth: 300,
+                timeout: 1000,
+                panel: '.panel'
             }); // 3
 
         });    

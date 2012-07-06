@@ -17,31 +17,29 @@
 
     // structure is:
     // <div class="slider">
-    //     <div class="panel">
-    //         <div class="slide 1">
-    //             // ... any content ...
-    //         </div>
-    //         <div class="slide 2">
-    //             // ... any content ...
-    //         </div>
-    //         <div class="slide 3">
-    //             // ... any content ...
-    //         </div>
+    //     <div class="slide 1">
+    //         // ... any content ...
+    //     </div>
+    //     <div class="slide 2">
+    //         // ... any content ...
+    //     </div>
+    //     <div class="slide 3">
+    //         // ... any content ...
     //     </div>
     // </div>
     var defaults = {
         slide:        '.slide', // default slide class
-        panel:        '.panel', // default panel class (section that contains all slides)
+        panel:        false, // default panel class (section that contains all slides). builds one for you by default
         direction:    'next', // [next | prev] indicates direction to move slider if it auto-slides
         init:         function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
         before:       function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
         after:        function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
-        slideshow:    false, // is this a slideshow? (i.e. auto-advances)
+        slideshow:    true, // is this a slideshow? (i.e. auto-advances)
         speed:        800, // transition speed in ms
         timeout:      8000, // timeout between slides (timer starts after last slide transition ends)
         easing:       'swing', // easing. without jQuery UI, only swing and linear are supported
         fullWidth:    false, // should this slideshow take up the entire width of the screen?
-        needsStyle:   false, // apply styles via jQuery?
+        needsStyle:   true, // apply styles via jQuery?
         nextButton:   false, // class for button that moves slideshow forward
         prevButton:   false, // class for button that moves slideshow backward
         navigation:   false,
@@ -53,7 +51,6 @@
 
         // Not Yet Implemented
         responsive:   false // this can be used to make sliders to be responsive.
-
     };
 
     var clickable = true;
@@ -66,11 +63,18 @@
             // return self for chaining
             return this.each(function() {
                 var $this = $(this);
-               
+
                 var settings = $.extend({}, defaults, options);
                 $this.data('carousel', settings);
                                 
                 settings.curSlideIndex = 0;
+
+                if(settings.panel === false) {
+                    var panelClass = 'carousel-panel';
+                    var $tmpSlides = $this.find(settings.slide);
+                    $('<div class="carousel-panel" />').appendTo($this).append($tmpSlides);
+                    settings.panel = '.' + panelClass;
+                }
 
                 // set up vars
                 settings.jump = 1;
