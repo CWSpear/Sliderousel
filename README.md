@@ -35,11 +35,13 @@ Style
 
 Obviously, there may be some styling you'd like to apply. Maybe some margin on the slides unless you _want_ them touching, etc.
 
+If you want to define all of the styles your own, set needsStyle to false.
+
 
 Usage
 =====
 
-```jQuery
+```javascript
 $('.slider').carousel();
 ```
 
@@ -80,7 +82,7 @@ JSHint
 
 This code is under JSHint via SublimeLinter. If you want to contribute, I'd really appreciate if your code could pass JSHint with these options:
 
-```json
+```javascript
 "jshint_options":
 {
     // inclusive  
