@@ -1,17 +1,17 @@
-// Cameron Spear's "Slidersel" (that's supposed to be slider + carousel)
+// Cameron Spear's "Sliderousel" (that's supposed to be slider + carousel)
 ;(function($, document, window, undefined) {
-    $.fn.carousel = function(method) {  
+    $.fn.carousel = function(method) {
         // Method calling logic
         if(methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {        
+        } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
             $.error('Method ' +  method + ' does not exist on jQuery.carousel');
-        } 
+        }
         
         // function next() { methods.next.apply(this, arguments); }
-    }
+    };
     
     // default slides
 
@@ -45,13 +45,12 @@
         nextButton:   false, // class for button that moves slideshow forward
         prevButton:   false, // class for button that moves slideshow backward
         navigation:   false,
-        slidesToShow: -1, // number of slides to show at one time (-1 for as many as will fit). 
-                          // does not initiate if there aren't that many slides. 
+        slidesToShow: -1  // number of slides to show at one time (-1 for as many as will fit).
+                          // does not initiate if there aren't that many slides.
                           // does not apply to fullwidth slideshows
-    };    
+    };
 
     var clickable = true;
-    var $panel; // doesn't change throughout plugin, so let's just have one reference set up in init
         
     var methods = {
 
@@ -59,7 +58,7 @@
         init: function(options) {
 
             // return self for chaining
-            return this.each(function() {   
+            return this.each(function() {
                 var $this = $(this);
                
                 var settings = $.extend({}, defaults, options);
@@ -69,7 +68,7 @@
 
                 // set up vars
                 settings.jump = 1;
-                $panel = $this.find(settings.panel);
+                var $panel = $this.find(settings.panel);
                 var $slides = $panel.find(settings.slide);
 
                 // initialize positions (which are based off of initial DOM position)
@@ -77,7 +76,7 @@
                     $(this).data('position', index);
                 });
                 
-                if($slides.length >= settings.slidesToShow || settings.slidesToShow === -1) {    
+                if($slides.length >= settings.slidesToShow || settings.slidesToShow === -1) {
 
                     // option to set the styles via jQuery
                     // extra initialization overhead, but easier to set up
@@ -102,13 +101,13 @@
                         // because of different combinations of settings, this can get complex,
                         // but we need to adjust the slider on screen resize
                         if(settings.fullWidth) {
-                            $this.width(Math.floor($(this).width())) 
+                            $this.width(Math.floor($(this).width()));
                             settings.offset = $slides.outerWidth(true) / 2;
                         } else {
                             settings.offset = 0;
 
                             if(settings.slidesToShow > 0) {
-                                $this.width(settings.slidesToShow * settings.slideWidth); 
+                                $this.width(settings.slidesToShow * settings.slideWidth);
                             }
                         }
                         
@@ -125,15 +124,15 @@
                     
                     // bind buttons
                     if(settings.nextButton) {
-                        $(settings.nextButton).click(function(event) { 
-                            event.preventDefault(); 
-                            $this.carousel('next'); 
+                        $(settings.nextButton).click(function(event) {
+                            event.preventDefault();
+                            $this.carousel('next');
                         });
                     }
                     if(settings.prevButton) {
-                        $(settings.prevButton).click(function(event) { 
-                            event.preventDefault(); 
-                            $this.carousel('prev'); 
+                        $(settings.prevButton).click(function(event) {
+                            event.preventDefault();
+                            $this.carousel('prev');
                         });
                     }
                     
@@ -142,7 +141,7 @@
                         if(settings.numberOfSlides == 1) {
                             $slides.last()
                                 .after($slides.first().clone(true))
-                                .after($slides.first().clone(true), settings); 
+                                .after($slides.first().clone(true), settings);
                         }
 
                         if(settings.numberOfSlides == 2) {
@@ -151,7 +150,7 @@
                         }
                     }
                     
-                    // first last slide before first 
+                    // first last slide before first
                     $slides.last().insertBefore(
                         $slides.first()
                     );
@@ -163,12 +162,12 @@
                     // set timeout if this is a slideshow
                     if(settings.slideshow) {
                         settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
-                    }   
+                    }
 
                     // set up auto navigation
                     if(settings.navigation) {
                         var $nav = $('<div class="carousel-navigation">').appendTo($this).on('click', 'a', function(event) {
-                            event.preventDefault;
+                            event.preventDefault();
 
                             var jumpTo = $(this).data('jump');
                             $this.carousel('jump', jumpTo);
@@ -180,13 +179,13 @@
                     }
 
                     // it sets up sizing vars on window's resize, so let's force it the first time
-                    $(window).resize();  
+                    $(window).resize();
                 }
             });
         }, // init()
         
         // move slider in the forward direction (direction depends on settings)
-        next: function() { 
+        next: function() {
 
             // return self for chaining
             return $(this).each(function() {
@@ -199,11 +198,12 @@
                 clickable = false;
 
                 // set up variables
+                var $panel = $this.find(settings.panel);
                 var $slides = $panel.find(settings.slide);
 
                 // prep the slider to go forward
                 // if we're sliding several at once, jump will be the number we're jumping, so we prepare accodingly
-                var jump = settings.jump;                
+                var jump = settings.jump;
                 for(var i=0; i < jump; i++) {
                     // order constantly changing, so let's not use cached version
                     var $clone = $panel.find(settings.slide).eq(i).clone(true, false);
@@ -222,8 +222,11 @@
                 );
         
                 // advance the slider to the next position
-                $(settings.panel).animate({'left': '-=' + settings.slideAmount}, settings.speed, settings.easing,
-                    function() {     
+                $panel.animate(
+                    {'left': '-=' + settings.slideAmount},
+                    settings.speed,
+                    settings.easing,
+                    function() {
                         // reset the slider positions
                         for(var i=0; i < jump; i++) {
                             // order constantly changing, so let's not use cached version
@@ -245,14 +248,15 @@
             
                         // make the slider buttons clickable again
                         clickable = true;
+
+                        // start time for timeout AFTER animation finishes
+                        if(settings.slideshow) {
+                            clearTimeout(settings.timer);
+                            settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
+                        }
                     }
-                );  
-                                    
-                if(settings.slideshow) {
-                    clearTimeout(settings.timer);
-                    settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
-                }                   
-            }); 
+                ); // $panel.animate()
+            });
         }, // next()
 
         // move slider in the backward direction (direction depends on settings)
@@ -269,6 +273,7 @@
                 clickable = false;
 
                 // set up variables
+                var $panel = $this.find(settings.panel);
                 var $slides = $panel.find(settings.slide);
     
                 // prep the slider to go backward by cloning last slide to the front and adjusting positioning
@@ -278,7 +283,7 @@
                 for(var i = 0; i < jump; i++) {
                     var len = $panel.find(settings.slide).length;
                     var $clone = $panel.find(settings.slide).eq(len - 1 - i).clone(true, false);
-                    $clone.insertBefore($panel.find(settings.slide).first()); 
+                    $clone.insertBefore($panel.find(settings.slide).first());
                 }
 
                 $panel.css('left', '-' + ((settings.slideWidth + settings.slideAmount) + settings.offset) + 'px');
@@ -295,15 +300,18 @@
                 );
                 
                 // advance the slider to the previous position
-                $(settings.panel).animate({'left': '+=' + settings.slideAmount}, settings.speed, settings.easing,
-                    function() {        
+                $panel.animate(
+                    {'left': '+=' + settings.slideAmount},
+                    settings.speed,
+                    settings.easing,
+                    function() {
                         // reset the slider positions
                         for(var i=0; i < jump; i++) {
                             $panel.find(settings.slide).first().remove();
                             $panel.find(settings.slide).first().before($panel.find(settings.slide).last());
                         }
 
-                        $panel.css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');                      
+                        $panel.css('left', '-' + ((settings.slideWidth) + settings.offset) + 'px');
                                 
                         // order has changed. refresh $slides var
                         $slides = $panel.find(settings.slide);
@@ -318,14 +326,15 @@
         
                         // make the slider buttons clickable again
                         clickable = true;
+
+                        // start time for timeout AFTER animation finishes
+                        if(settings.slideshow) {
+                            clearTimeout(settings.timer);
+                            settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
+                        }
                     }
-                );
-                
-                if(settings.slideshow) {
-                    clearTimeout(settings.timer);
-                    settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
-                }   
-            }); 
+                ); // $panel.animate()
+            });
         }, // prev()
 
         // jump to a specified position
@@ -336,6 +345,7 @@
                 var $this = $(this);
                 
                 var settings = $this.data('carousel');
+                var $panel = $this.find(settings.panel);
 
                 // get current position
                 var currentPosition = $panel.find(settings.slide).eq(1).data('position');
@@ -343,8 +353,9 @@
                 // find how much we're changing
                 var change = jumpTo - currentPosition;
                 
-                // if change == 0, it means we're already on that slide
-                if(change == 0) return;
+                // if change === 0, it means we're already on that slide
+                if(change === 0) return;
+
                 
                 // determine that we're going to jump by abs(change)
                 settings.jump = Math.abs(change);
@@ -365,7 +376,7 @@
                 // restore settings to their normal amounts
                 settings.jump = 1;
                 settings.slideAmount = tempWidth;
-            }); 
+            });
         } // jump()
-    }
+    }; // methods
 })(jQuery, this, document);
