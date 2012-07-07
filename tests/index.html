@@ -13,7 +13,11 @@
         }
 
         .slide {
-            margin-right:10px;
+            /*margin-right:20px;*/
+        }
+
+        [id^=carousel] {
+            margin-bottom:20px;
         }
     </style>
 </head>
@@ -118,56 +122,64 @@
     </div>
     <div id="carousel3-output"></div>
 
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="../sliderousel.js"></script>
+    <script src="../ignore/cycle.js"></script>
+    <!-- <script src="../ignore/test.js"></script> -->
     <script>
+
         $(document).ready(function() {
-            $('#carousel').carousel();
+
+            // $('#carousel, #carousel1, #carousel2, #carousel3 .panel').cycle();
+
+            // return;
+
+            $('#carousel').carousel({timeout:500});
 
             $('#carousel1').carousel({
                 nextButton: '.next',
                 prevButton: '.prev',
                 slidesToShow: 2,
                 navigation: true,
-                slideshow: false
+                timeout: 1000
             }); // 1
 
             $('#carousel2').carousel({
                 slidesToShow: 1,
-                timeout: 1000,
-                init: function(prev, cur, next, settings) {
-                    console.log(
-                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                    );
-                },
-                before: function(prev, cur, next, settings) {
-                    console.log(
-                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                    );
-                },
-                after: function(prev, cur, next, settings) {
-                    console.log(
-                        prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
-                        next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
-                    );
-                }
+                timeout: 1500
+                // init: function(prev, cur, next, settings) {
+                //     console.log(
+                //         prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                //     );
+                // },
+                // before: function(prev, cur, next, settings) {
+                //     console.log(
+                //         prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                //     );
+                // },
+                // after: function(prev, cur, next, settings) {
+                //     console.log(
+                //         prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         cur.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),
+                //         next.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1')
+                //     );
+                // }
             }); // 2
 
             $('#carousel3').carousel({
                 fullWidth: true,
                 responsive: true,
                 minWidth: 300,
-                timeout: 1000,
+                timeout: 2500,
                 panel: '.panel'
             }); // 3
 
-        });    
+        });  
+
     </script>
 </body>
 </html>

@@ -75,9 +75,9 @@ var defaults = {
 	                        //     does not apply to fullwidth slideshows
 	
 	// callbacks
-	init:         function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
-	before:       function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
-	after:        function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
+    init:   function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
+    before: function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
+    after:  function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
 };
 ```
 
@@ -106,7 +106,7 @@ This code is under JSHint via SublimeLinter. If you want to contribute, I'd real
     "sub":       true,
 
     // environment
-    "browser":   true,
+    // "browser":   true,
     "devel":     true,
     "jquery":    true
 }

@@ -7,15 +7,11 @@
         } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error('Method ' +  method + ' does not exist on jQuery.carousel');
+            $.error('Method ' +  method + ' does not exist on $.carousel');
         }
-        
-        // function next() { methods.next.apply(this, arguments); }
     };
     
-    // default slides
-
-    // structure is:
+    // default basic structure is:
     // <div class="slider">
     //     <div class="slide 1">
     //         // ... any content ...
@@ -27,6 +23,8 @@
     //         // ... any content ...
     //     </div>
     // </div>
+
+    // default options
     var defaults = {
         slide:        '.slide', // default slide selector/jQuery object
         panel:        false,    // default panel selector/jQuery object (section that contains all slides). builds one for you by default
@@ -37,7 +35,7 @@
         timeout:      8000,     // timeout between slides (timer starts after last slide transition ends)
         fullWidth:    false,    // should this slideshow take up the entire width of the screen?
         
-        easing:       'swing',  // without jQuery UI, only swing and linear are supported.
+        easing:       'swing',  // without jQuery UI (or some sort of supported plugin), only swing and linear are supported.
                                 //     see http://jqueryui.com/demos/effect/easing.html for jQuery UI easings
 
         nextButton:   false,    // selector/jQuery object for button that moves slideshow forward
@@ -50,18 +48,16 @@
                                 //     does not apply to fullwidth slideshows
 
         // callbacks
-        init:         function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
-        before:       function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
-        after:        function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
+        init:   function(prevSlide, curSlide, nextSlide, settings) {}, // before-init callback
+        before: function(prevSlide, curSlide, nextSlide, settings) {}, // before-slide callback
+        after:  function(prevSlide, curSlide, nextSlide, settings) {}, // after-slide callback
 
 
         // Not Yet Implemented
         responsive:   false, // this can be used to make sliders to be responsive.
         minWidth:     960 // set a minWidth for fullWidth sliders. fullWidth sliders can be responsive,
                            // this makes sure they don't get too small. Only is used is responsive is true
-    };
-
-    var clickable = true;
+    }; // defaults
         
     var methods = {
 
@@ -76,11 +72,12 @@
                 $this.data('carousel', settings);
                                 
                 settings.curSlideIndex = 0;
+                settings.clickable = true;
 
                 if(settings.panel === false) {
                     var panelClass = 'carousel-panel';
                     var $tmpSlides = $this.find(settings.slide);
-                    $('<div class="carousel-panel" />').appendTo($this).append($tmpSlides);
+                    $('<div class="' + panelClass + '" />').appendTo($this).append($tmpSlides);
                     settings.panel = '.' + panelClass;
                 }
 
@@ -94,6 +91,7 @@
                     $(this).data('position', index);
                 });
                 
+                // don't intialize the slides if there are less slides than we even want to show
                 if($slides.length >= settings.slidesToShow || settings.slidesToShow === -1) {
 
                     // option to set the styles via jQuery
@@ -180,9 +178,10 @@
                 
                     // set timeout if this is a slideshow
                     if(settings.slideshow) {
-                        settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
+                        settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
                     }
 
+                    // TODO: this nav thing could definitely be a lot more robust
                     // set up auto navigation
                     if(settings.navigation) {
                         var $nav = $('<div class="carousel-navigation">').appendTo($this).on('click', 'a', function(event) {
@@ -192,6 +191,7 @@
                             $this.carousel('jump', jumpTo);
                         });
 
+                        // create links for jumps
                         $slides.each(function(i) {
                             $('<a href="#" data-jump="' + i + '">' + (i + 1) + '</a>').appendTo($nav);
                         });
@@ -211,10 +211,17 @@
                 var $this = $(this);
                 
                 var settings = $this.data('carousel');
-          
+
+                console.log($this);
+
                 // can't chain clicks
-                if(!clickable) return;
-                clickable = false;
+                if(!settings.clickable) return;
+                settings.clickable = false;
+
+                console.log('after', $this);
+
+                // timer's gonna get reset at the end of the callback, but let's make sure it doesn't trigger in the middle of everything
+                if(settings.timer !== undefined) window.clearTimeout(settings.timer);
 
                 // set up variables
                 var $panel = $this.find(settings.panel);
@@ -265,13 +272,12 @@
                             settings // settings (for reference on timer lengths, etc)
                         );
             
-                        // make the slider buttons clickable again
-                        clickable = true;
+                        // make the slider buttons settings.clickable again
+                        settings.clickable = true;
 
                         // start time for timeout AFTER animation finishes
                         if(settings.slideshow) {
-                            clearTimeout(settings.timer);
-                            settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
+                            settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
                         }
                     }
                 ); // $panel.animate()
@@ -288,8 +294,11 @@
                 var settings = $this.data('carousel');
           
                 // can't chain clicks
-                if(!clickable) return;
-                clickable = false;
+                if(!settings.clickable) return;
+                settings.clickable = false;
+
+                // timer's gonna get reset at the end of the callback, but let's make sure it doesn't trigger in the middle of everything
+                if(settings.timer !== undefined) window.clearTimeout(settings.timer);
 
                 // set up variables
                 var $panel = $this.find(settings.panel);
@@ -343,13 +352,12 @@
                             settings // settings (for reference on timer lengths, etc)
                         );
         
-                        // make the slider buttons clickable again
-                        clickable = true;
+                        // make the slider buttons settings.clickable again
+                        settings.clickable = true;
 
                         // start time for timeout AFTER animation finishes
                         if(settings.slideshow) {
-                            clearTimeout(settings.timer);
-                            settings.timer = setTimeout(function() { $this.carousel(settings.direction); }, settings.timeout);
+                            settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
                         }
                     }
                 ); // $panel.animate()
@@ -375,12 +383,11 @@
                 // if change === 0, it means we're already on that slide
                 if(change === 0) return;
 
-                
                 // determine that we're going to jump by abs(change)
                 settings.jump = Math.abs(change);
 
                 // stop current timeout
-                clearTimeout(settings.timer);
+                if(settings.timer !== undefined) window.clearTimeout(settings.timer);
 
                 // make a note of the "normal" slideAmount
                 var tempWidth = settings.slideAmount;
@@ -399,4 +406,5 @@
         } // jump()
 
     }; // methods
-})(jQuery, this, document);
+
+})(jQuery, this, this.document);
