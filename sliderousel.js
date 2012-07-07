@@ -212,13 +212,9 @@
                 
                 var settings = $this.data('carousel');
 
-                console.log($this);
-
                 // can't chain clicks
                 if(!settings.clickable) return;
                 settings.clickable = false;
-
-                console.log('after', $this);
 
                 // timer's gonna get reset at the end of the callback, but let's make sure it doesn't trigger in the middle of everything
                 if(settings.timer !== undefined) window.clearTimeout(settings.timer);
