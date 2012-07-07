@@ -17,85 +17,110 @@
         }
 
         [id^=carousel] {
-            margin-bottom:20px;
+            margin-bottom:30px;
+        }
+
+        #wrapper {
+            margin:0 auto;
+            width:960px;
+            min-width:960px;
+        }
+
+        #container {
+            width:900px;
+            margin:0 auto;
+            background:#aaa;
+        }
+
+        #carousel3 {
+            min-width:960px;
         }
     </style>
 </head>
 <body>
-    <div id="carousel">
+    <div id="wrapper">
+        <div id="container">
 
-        <div class="slide 0">
-            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
-        </div>
-        <div class="slide 1">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
-        </div>
-        <div class="slide 2">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
-        </div>
-        <div class="slide 3">
-            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
-        </div>
-        <div class="slide 4">
-            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
-        </div>
-        <div class="slide 5">
-            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
-        </div>
+            <div>Default, out-of-the-box settings (i.e. no custom options):</div>
+            <div id="carousel">
 
+                <div class="slide 0">
+                    <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                </div>
+                <div class="slide 1">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                </div>
+                <div class="slide 2">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                </div>
+                <div class="slide 3">
+                    <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                </div>
+                <div class="slide 4">
+                    <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                </div>
+                <div class="slide 5">
+                    <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                </div>
+
+            </div>
+
+
+            <div>Disable auto-advance (slideshow mode), use custom prev/next buttons and add an auto-nav and only show 2 items:</div>
+            <button class="prev">Prev</button>
+            <button class="next">Next</button>
+
+            <div id="carousel1">
+
+                <div class="slide 0">
+                    <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                </div>
+                <div class="slide 1">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                </div>
+                <div class="slide 2">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                </div>
+                <div class="slide 3">
+                    <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                </div>
+                <div class="slide 4">
+                    <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                </div>
+                <div class="slide 5">
+                    <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                </div>
+
+            </div>
+
+            <div>Show only 1 item, slide backward and slide really fast:</div>
+            <div id="carousel2">
+
+                <div class="slide 0">
+                    <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
+                </div>
+                <div class="slide 1">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
+                </div>
+                <div class="slide 2">
+                    <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
+                </div>
+                <div class="slide 3">
+                    <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
+                </div>
+                <div class="slide 4">
+                    <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
+                </div>
+                <div class="slide 5">
+                    <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
+                </div>
+
+            </div>
+            <div id="carousel2-output"></div>
+        </div>
     </div>
 
-
-    <button class="prev">Prev</button>
-    <button class="next">Next</button>
-
-    <div id="carousel1">
-
-        <div class="slide 0">
-            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
-        </div>
-        <div class="slide 1">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
-        </div>
-        <div class="slide 2">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
-        </div>
-        <div class="slide 3">
-            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
-        </div>
-        <div class="slide 4">
-            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
-        </div>
-        <div class="slide 5">
-            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
-        </div>
-
-    </div>
-
-    <div id="carousel2">
-
-        <div class="slide 0">
-            <img width="400" height="300" src="http://placehold.it/400x300/900/fff/.png&amp;text=Slide+1">
-        </div>
-        <div class="slide 1">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffa500/fff/.png&amp;text=Slide+2">
-        </div>
-        <div class="slide 2">
-            <img width="400" height="300" src="http://placehold.it/400x300/ffff00/fff/.png&amp;text=Slide+3">
-        </div>
-        <div class="slide 3">
-            <img width="400" height="300" src="http://placehold.it/400x300/090/fff/.png&amp;text=Slide+4">
-        </div>
-        <div class="slide 4">
-            <img width="400" height="300" src="http://placehold.it/400x300/009/fff/.png&amp;text=Slide+5">
-        </div>
-        <div class="slide 5">
-            <img width="400" height="300" src="http://placehold.it/400x300/800080/fff/.png&amp;text=Slide+6">
-        </div>
-
-    </div>
-    <div id="carousel2-output"></div>
-
+    <div>Simple full screen example:</div>
     <div id="carousel3">
         <div class="panel">
 
@@ -134,19 +159,21 @@
 
             // return;
 
-            $('#carousel').carousel({timeout:500});
+            $('#carousel').carousel();
 
             $('#carousel1').carousel({
                 nextButton: '.next',
                 prevButton: '.prev',
                 slidesToShow: 2,
                 navigation: true,
-                timeout: 1000
+                slideshow: false
             }); // 1
 
             $('#carousel2').carousel({
                 slidesToShow: 1,
-                timeout: 1500
+                timeout: 1500,
+                direction: 'prev',
+                speed: 100,
                 // init: function(prev, cur, next, settings) {
                 //     console.log(
                 //         prev.find('img').attr('src').replace(/.*Slide\+(\d).*/, 'Slide $1'),

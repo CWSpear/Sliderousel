@@ -115,8 +115,14 @@ This code is under JSHint via SublimeLinter. If you want to contribute, I'd real
 
 Changelog
 ---
+### 1.0
+No new features, just making sure there are no bugs for 1.0.
 
-### Beta 0.9
+* __[Bugfix]__ Fixed a bug where direction setting was being ignored
+* __[Bugfix]__ Fixed a bug that caused multiple auto slideshows on one page not to function
+
+### 1.0 Beta
+The intent for 1.0 Beta was to optimize the code and clean up some things. Once all of the known bugs are squashed and I've tested all the current features, we will go full 1.0.
 
 * __[Feature]__ Added inital support for pre-built auto navigation
 * __[Enhancement]__ Made it so you don't have to wrap your code in a panel (the script will do it for you). You can still define one if you have it in your markup. This makes the default syntax simpler. Also made it apply style by default. This makes the default slider to require only simple markup and no CSS.

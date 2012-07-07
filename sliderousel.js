@@ -178,7 +178,7 @@
                 
                     // set timeout if this is a slideshow
                     if(settings.slideshow) {
-                        settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
+                        settings.timer = window.setTimeout(function() { methods[settings.direction].apply($this); }, settings.timeout);
                     }
 
                     // TODO: this nav thing could definitely be a lot more robust
@@ -273,7 +273,7 @@
 
                         // start time for timeout AFTER animation finishes
                         if(settings.slideshow) {
-                            settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
+                            settings.timer = window.setTimeout(function() { methods[settings.direction].apply($this); }, settings.timeout);
                         }
                     }
                 ); // $panel.animate()
@@ -353,7 +353,7 @@
 
                         // start time for timeout AFTER animation finishes
                         if(settings.slideshow) {
-                            settings.timer = window.setTimeout(function() { methods.next.apply($this, [settings.direction]); }, settings.timeout);
+                            settings.timer = window.setTimeout(function() { methods[settings.direction].apply($this); }, settings.timeout);
                         }
                     }
                 ); // $panel.animate()
