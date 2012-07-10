@@ -132,7 +132,7 @@
                         settings.curSlideIndex = (settings.curSlideIndex % settings.numberOfSlides) + 1;
                         
                         // TODO: implement responsive
-                        // make slideshow responsive
+                        // make slideshow responsive (currently purposedly disabled)
                         if(settings.fullWidth && settings.responsive && false) {
                             $slides.find('img').css('max-width', Math.max(settings.minWidth, $this.width()));
                             $this.height('auto');
