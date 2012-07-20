@@ -116,6 +116,11 @@ This code is under JSHint via SublimeLinter. If you want to contribute, I'd real
 
 Changelog
 ---
+### 1.0.1
+Minor new functionality
+
+* __[Feature]__ Added option to set a fixed slide width
+
 ### 1.0
 No new features, just making sure there are no bugs for 1.0.
 

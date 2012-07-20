@@ -31,6 +31,11 @@
         #carousel3 {
             min-width:960px;
         }
+
+        #carousel4 {
+            width:400px;
+            border:2px solid #444444;
+        }
     </style>
 </head>
 <body>
@@ -113,6 +118,23 @@
 
             </div>
             <div id="carousel2-output"></div>
+
+            <div>testing fixed slide width option</div>
+            <div id="carousel4">
+                <div class="slide">
+                    <a href="#">Here is some random text</a>
+                </div>
+                <div class="slide">
+                    <a href="#">In ut est lorem. Nulla euismod, turpis id posuere...</a>
+                </div>
+                <div class="slide">
+                    <a href="#">Vivamus euismod pellentesque nulla, sit amet amet...</a>
+                </div>
+                <div class="slide">
+                    <a href="#">Sed vitae dolor feugiat erat euismod viverra amet...</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -201,6 +223,9 @@
                 panel: '.panel'
             }); // 3
 
+            $('#carousel4').carousel({
+                slideWidth: 400
+            })
         });  
 
     </script>

@@ -99,7 +99,7 @@
                     // extra initialization overhead, but easier to set up
                     // must be done first or else the next step may have incorrect numbers
                     if(settings.needsStyle) {
-                        $this.width(settings.slideAmount).css('overflow', 'hidden');
+                        $this.css('overflow', 'hidden').width(settings.slideAmount);
                         $panel.width('12000px').css('position', 'relative');
                         
                         if(settings.fullWidth) $panel.css('margin-left', '50%');
