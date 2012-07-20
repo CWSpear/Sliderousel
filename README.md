@@ -70,6 +70,7 @@ var defaults = {
 	navigation:   false,    // automatically build navigation?
 	
 	needsStyle:   true,     // apply styles via jQuery?
+    slideWidth:   'auto',   // define a specific slide width
 	slidesToShow: -1,       // number of slides to show at one time (-1 for as many as will fit).
 	                        //     does not initiate if there aren't that many slides.
 	                        //     does not apply to fullwidth slideshows
